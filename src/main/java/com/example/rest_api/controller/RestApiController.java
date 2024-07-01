@@ -2,8 +2,10 @@ package com.example.rest_api.controller;
 
 
 import com.example.rest_api.model.BookQueryParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j // log()
 @RestController // Controller that handles rest api
 @RequestMapping("/api") // Handles all addresses that has /api
 public class RestApiController {
@@ -53,11 +55,22 @@ public class RestApiController {
     }
 
     // http://localhost:8080/api/book2?category=IT&issuedYear=2023&issuedMonth=01&issuedDay=31
-    // Receive data by an object - useful when they are many query parameters
+    // Receive data by an object - useful when there are many query parameters
     @GetMapping(path = "/book2")
     public void queryParamDto(
             BookQueryParam bookQueryParam
     ){
         System.out.println(bookQueryParam);
+    }
+
+    @DeleteMapping(path = {
+            "/user/{userName}/delete",
+            "/user/{userName}/del"
+            }
+    )
+    public void delete(
+        @PathVariable String userName
+    ){
+        log.info("user name :  {}", userName);
     }
 }
